@@ -1,0 +1,13 @@
+module Engine(z, a, b);
+output z;
+input[1:0] a, b;
+wire x, y, q, w;
+
+assign x = 1;
+assign y = a[1];
+xor xor1(q, x, y); // we want it to be 0
+
+
+
+
+endmodule

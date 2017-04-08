@@ -1,0 +1,78 @@
+#! /cs/local/bin/vvp
+:ivl_version "10.0 (stable)" "(v10_0)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "system";
+:vpi_module "vhdl_sys";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_0xd8caa0 .scope module, "tester" "tester" 2 1;
+ .timescale 0 0;
+v0xdb1a90_0 .var "a", 1 0;
+v0xdb1b50_0 .var "b", 1 0;
+v0xdb1c60_0 .var "flag", 0 0;
+v0xdb1d00_0 .net "z", 0 0, L_0xdb2a40;  1 drivers
+S_0xd6a2c0 .scope module, "engine1" "Engine" 2 6, 3 1 0, S_0xd8caa0;
+ .timescale 0 0;
+    .port_info 0 /OUTPUT 1 "z"
+    .port_info 1 /INPUT 2 "a"
+    .port_info 2 /INPUT 2 "b"
+L_0xdb25b0 .functor AND 1, L_0xdb2620, L_0xdb2710, C4<1>, C4<1>;
+L_0xdb2800 .functor NOT 1, L_0xdb25b0, C4<0>, C4<0>, C4<0>;
+L_0xdb28c0 .functor AND 1, L_0xdb2450, L_0xdb2800, C4<1>, C4<1>;
+L_0xdb2980 .functor AND 1, L_0xdb1da0, L_0xdb25b0, C4<1>, C4<1>;
+L_0xdb2a40 .functor OR 1, L_0xdb2980, L_0xdb28c0, C4<0>, C4<0>;
+v0xdb1140_0 .net *"_s3", 0 0, L_0xdb2620;  1 drivers
+v0xdb1220_0 .net *"_s5", 0 0, L_0xdb2710;  1 drivers
+v0xdb1300_0 .net "a", 1 0, v0xdb1a90_0;  1 drivers
+v0xdb13d0_0 .net "and1", 0 0, L_0xdb2980;  1 drivers
+v0xdb1470_0 .net "and2", 0 0, L_0xdb28c0;  1 drivers
+v0xdb1530_0 .net "b", 1 0, v0xdb1b50_0;  1 drivers
+v0xdb15f0_0 .net "c", 0 0, L_0xdb25b0;  1 drivers
+v0xdb1690_0 .net "notC", 0 0, L_0xdb2800;  1 drivers
+v0xdb1750_0 .net "z", 0 0, L_0xdb2a40;  alias, 1 drivers
+v0xdb18a0_0 .net "z1", 0 0, L_0xdb1da0;  1 drivers
+v0xdb1960_0 .net "z2", 0 0, L_0xdb2450;  1 drivers
+L_0xdb1da0 .part v0xdb1b50_0, 0, 1;
+L_0xdb2620 .part v0xdb1a90_0, 0, 1;
+L_0xdb2710 .part v0xdb1a90_0, 1, 1;
+S_0xd6a4e0 .scope module, "rm1" "rm" 3 7, 4 1 0, S_0xd6a2c0;
+ .timescale 0 0;
+    .port_info 0 /OUTPUT 1 "z"
+    .port_info 1 /INPUT 2 "a"
+    .port_info 2 /INPUT 2 "b"
+L_0xdb1e70 .functor AND 1, L_0xdb1f70, L_0xdb2060, C4<1>, C4<1>;
+L_0xdb21e0 .functor AND 1, L_0xdb2280, L_0xdb23b0, C4<1>, C4<1>;
+L_0xdb2450 .functor OR 1, L_0xdb1e70, L_0xdb21e0, C4<0>, C4<0>;
+v0xd65420_0 .net *"_s2", 0 0, L_0xdb1f70;  1 drivers
+v0xdb0930_0 .net *"_s4", 0 0, L_0xdb2060;  1 drivers
+v0xdb0a10_0 .net *"_s7", 0 0, L_0xdb2280;  1 drivers
+v0xdb0b00_0 .net *"_s9", 0 0, L_0xdb23b0;  1 drivers
+v0xdb0be0_0 .net "a", 1 0, v0xdb1a90_0;  alias, 1 drivers
+v0xdb0d10_0 .net "al", 0 0, L_0xdb1e70;  1 drivers
+v0xdb0dd0_0 .net "b", 1 0, v0xdb1b50_0;  alias, 1 drivers
+v0xdb0eb0_0 .net "be", 0 0, L_0xdb21e0;  1 drivers
+v0xdb0f70_0 .net "z", 0 0, L_0xdb2450;  alias, 1 drivers
+L_0xdb1f70 .part v0xdb1a90_0, 0, 1;
+L_0xdb2060 .part v0xdb1a90_0, 1, 1;
+L_0xdb2280 .part v0xdb1b50_0, 0, 1;
+L_0xdb23b0 .part v0xdb1b50_0, 1, 1;
+    .scope S_0xd8caa0;
+T_0 ;
+    %vpi_func 2 10 "$value$plusargs" 32, "a=%d", v0xdb1a90_0 {0 0 0};
+    %pad/u 1;
+    %store/vec4 v0xdb1c60_0, 0, 1;
+    %vpi_func 2 11 "$value$plusargs" 32, "b=%d", v0xdb1b50_0 {0 0 0};
+    %pad/u 1;
+    %store/vec4 v0xdb1c60_0, 0, 1;
+    %delay 1, 0;
+    %vpi_call 2 13 "$display", "a=%b b=%b z=%b", v0xdb1a90_0, v0xdb1b50_0, v0xdb1d00_0 {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 5;
+    "N/A";
+    "<interactive>";
+    "Prog.v";
+    "Engine.v";
+    "/cs/fac/pkg/verimips/hrLib/rm.v";
